@@ -1,6 +1,8 @@
 <template>
   <div class="container mt-4">
-    <div class="header d-flex justify-content-center align-items-center mb-3 p-3">
+    <div
+      class="header d-flex justify-content-center align-items-center mb-3 p-3"
+    >
       <h2 class="title">Ajouter un Paiement</h2>
     </div>
     <form @submit.prevent="handleSubmit">
@@ -13,9 +15,11 @@
             v-model="form.payer"
             class="form-control"
             placeholder="Nom du payeur"
-            :class="{'is-invalid': errors.payer}"
+            :class="{ 'is-invalid': errors.payer }"
           />
-          <div v-if="errors.payer" class="invalid-feedback">{{ errors.payer }}</div>
+          <div v-if="errors.payer" class="invalid-feedback">
+            {{ errors.payer }}
+          </div>
         </div>
 
         <div class="form-group col-md-6 mb-3">
@@ -26,9 +30,11 @@
             v-model="form.payerNumber"
             class="form-control"
             placeholder="Numéro téléphone du payeur"
-            :class="{'is-invalid': errors.payerNumber}"
+            :class="{ 'is-invalid': errors.payerNumber }"
           />
-          <div v-if="errors.payerNumber" class="invalid-feedback">{{ errors.payerNumber }}</div>
+          <div v-if="errors.payerNumber" class="invalid-feedback">
+            {{ errors.payerNumber }}
+          </div>
         </div>
       </div>
 
@@ -39,7 +45,7 @@
             id="student"
             v-model="student"
             class="form-select"
-            :class="{'is-invalid': errors.student}"
+            :class="{ 'is-invalid': errors.student }"
           >
             <option value="" disabled>Selectionner l'Apprenant</option>
             <option
@@ -50,7 +56,9 @@
               {{ student.fullName }}
             </option>
           </select>
-          <div v-if="errors.student" class="invalid-feedback">{{ errors.student }}</div>
+          <div v-if="errors.student" class="invalid-feedback">
+            {{ errors.student }}
+          </div>
         </div>
 
         <div class="form-group col-md-6 mb-3">
@@ -59,7 +67,7 @@
             id="registrationId"
             v-model="form.registrationId"
             class="form-select"
-            :class="{'is-invalid': errors.registrationId}"
+            :class="{ 'is-invalid': errors.registrationId }"
           >
             <option value="" disabled>Selectionner le Module</option>
             <option
@@ -70,7 +78,9 @@
               {{ registration.module.name }}
             </option>
           </select>
-          <div v-if="errors.registrationId" class="invalid-feedback">{{ errors.registrationId }}</div>
+          <div v-if="errors.registrationId" class="invalid-feedback">
+            {{ errors.registrationId }}
+          </div>
         </div>
 
         <div class="form-group col-md-6 mb-3">
@@ -79,14 +89,16 @@
             id="paymentMode"
             v-model="form.paymentMode"
             class="form-select"
-            :class="{'is-invalid': errors.paymentMode}"
+            :class="{ 'is-invalid': errors.paymentMode }"
           >
             <option value="" disabled>Choisissez une méthode</option>
             <option value="Carte Bancaire">Carte Bancaire</option>
             <option value="Espèces">Espèces</option>
             <option value="Mobile Money">Mobile Money</option>
           </select>
-          <div v-if="errors.paymentMode" class="invalid-feedback">{{ errors.paymentMode }}</div>
+          <div v-if="errors.paymentMode" class="invalid-feedback">
+            {{ errors.paymentMode }}
+          </div>
         </div>
 
         <div class="form-group col-md-6 mb-3">
@@ -96,15 +108,19 @@
             id="payerNumber"
             v-model="form.amount"
             class="form-control"
-            placeholder="Numéro téléphone du payeur"
-            :class="{'is-invalid': errors.amount}"
+            placeholder="Montant à payer"
+            :class="{ 'is-invalid': errors.amount }"
           />
-          <div v-if="errors.payerNumber" class="invalid-feedback">{{ errors.payerNumber }}</div>
+          <div v-if="errors.amount" class="invalid-feedback">
+            {{ errors.amount }}
+          </div>
         </div>
       </div>
 
       <div class="d-flex justify-content-between">
-        <router-link class="btn btn-cancel" :to="{ name: 'payment-list' }">Annuler</router-link>
+        <router-link class="btn btn-cancel" :to="{ name: 'payment-list' }"
+          >Annuler</router-link
+        >
         <button type="submit" class="btn btn-add">Ajouter</button>
       </div>
     </form>
@@ -160,9 +176,10 @@ onMounted(async () => {
 
 const validateForm = () => {
   errors.payer = form.payer ? "" : "Le nom du payeur est requis.";
-  
+
   if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(form.payer)) {
-    errors.payer = "Le nom du payeur ne doit contenir que des lettres et des espaces.";
+    errors.payer =
+      "Le nom du payeur ne doit contenir que des lettres et des espaces.";
   }
 
   errors.payerNumber =
@@ -171,7 +188,9 @@ const validateForm = () => {
       : "Le numéro de téléphone est invalide (doit comporter 8 chiffres).";
   errors.student = student.value ? "" : "L'apprenant est requis.";
   errors.registrationId = form.registrationId ? "" : "Le module est requis.";
-  errors.paymentMode = form.paymentMode ? "" : "La méthode de paiement est requise.";
+  errors.paymentMode = form.paymentMode
+    ? ""
+    : "La méthode de paiement est requise.";
 
   return !Object.values(errors).some((error) => error);
 };
